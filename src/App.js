@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Card,Button,Layout} from 'antd'
+import {Card,Button,Layout,Tag} from 'antd'
 import './index.css'
 
 const { Header, Footer, Content } = Layout;
@@ -179,6 +179,14 @@ export default class App extends Component{
                         </Card>
                     </div>
                 </Content>
+                <Footer>
+                    <h3>My list titles</h3>
+                    {
+                        mylist.map((item)=> (
+                            <Tag color="red">{item.title}</Tag>
+                        ))
+                    }
+                </Footer>
 
             </Layout>
 
