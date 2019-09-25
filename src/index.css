@@ -41,3 +41,11 @@ span img{
     padding-top: 10px !important;
     padding-bottom: 40px !important;
 }
+.ant-card-head {
+    border: transparent!important;
+}
+.ant-card-head-wrapper{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}

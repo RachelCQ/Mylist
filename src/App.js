@@ -145,7 +145,7 @@ export default class App extends Component{
                 <Header><img style={{height:'100%'}} src="https://www.edisonresearch.com/wp-content/uploads/2019/04/Netflix.png" alt=""/></Header>
                 <Content>
                     <div style={{ background: 'black', padding: '30px' }}>
-                        <Card title="My List" bordered={false} style={{ width: '100%' ,marginBottom:10,minHeight:300}}>
+                        <Card title="My List" bordered={false} style={{ width: '100%' ,marginBottom:10,minHeight:300,backgroundColor:'black'}}>
                             <div ref='listWrapper' className='wrapper'>
                                 {
                                     mylist.map((item,index)=>(
@@ -162,7 +162,7 @@ export default class App extends Component{
 
                         </Card>
                         {/*<hr/>*/}
-                        <Card title="Recommendations" bordered={false} style={{ width: '100%' ,minHeight:300}}>
+                        <Card title="Recommendations" bordered={false} style={{ width: '100%' ,minHeight:300,backgroundColor:'black'}}>
                             <div ref='recomWrapper' className='wrapper'>
                                 {
                                     recommendations.map((item,index)=>(
