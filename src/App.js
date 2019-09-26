@@ -1,87 +1,13 @@
 import React, {Component} from 'react'
 import {Card,Button,Layout,Tag} from 'antd'
+import {connect} from 'react-redux'
 import './index.css'
-
+import {clickList,clickRecom} from './store/actions'
 const { Header, Footer, Content } = Layout;
 
-const data = {
-    'mylist' : [
-
-        {
-
-            'title': 'Futurama',
-
-            'id': 1,
-
-            'img': 'http://cdn1.nflximg.net/webp/7621/3787621.webp'
-
-        },
-
-        {
-
-            'title': 'The Interview',
-
-            'id': 2,
-
-            'img': 'http://cdn1.nflximg.net/webp/1381/11971381.webp'
-
-        },
-
-        {
-
-            'title': 'Gilmore Girls',
-
-            'id': 3,
-
-            'img': 'http://cdn1.nflximg.net/webp/7451/11317451.webp'
-
-        }
-
-    ],
-    'recommendations' : [
-
-        {
-
-            'title': 'Family Guy',
-
-            'id': 4,
-
-            'img': 'http://cdn5.nflximg.net/webp/5815/2515815.webp'
-
-        },
-
-        {
-
-            'title': 'The Croods',
-
-            'id': 5,
-
-            'img': 'http://cdn3.nflximg.net/webp/2353/3862353.webp'
-
-        },
-
-        {
-
-            'title': 'Friends',
-
-            'id': 6,
-
-            'img': 'http://cdn0.nflximg.net/webp/3200/9163200.webp'
-
-        }
-
-    ]
-};
-const {mylist,recommendations} = data
-
-export default class App extends Component{
+class App extends Component{
     constructor(props){
         super(props)
-        this.state={
-            mylist,
-            recommendations
-        }
-
     }
     handleHoverList = (index) =>{
         const {listWrapper} = this.refs
@@ -112,34 +38,28 @@ export default class App extends Component{
     }
 
     handleClickList = (id) =>{
-        const {mylist,recommendations} = this.state
+        const {mylist} = this.props.lists
         let theMovie = mylist.filter((movie)=>{
             return movie.id === id
         })
         let newData = mylist.filter((movie)=>{
                 return movie.id !== id
             })
-        this.setState({
-            mylist: newData,
-            recommendations:[...recommendations,...theMovie]
-        })
+        this.props.clickList(newData,theMovie)
     }
     handleClickRecom = (id) =>{
-        const {mylist,recommendations} = this.state
+        const {recommendations} = this.props.lists
         let theMovie = recommendations.filter((movie)=>{
             return movie.id === id
         })
         let newData = recommendations.filter((movie)=>{
             return movie.id !== id
         })
-        this.setState({
-            mylist: [...mylist,...theMovie],
-            recommendations:newData
-        })
+        this.props.clickRecom(newData,theMovie)
+
     }
     render(){
-
-        const {mylist,recommendations} = this.state
+        const {mylist,recommendations} = this.props.lists
         return(
             <Layout>
                 <Header><img style={{height:'100%'}} src="https://www.edisonresearch.com/wp-content/uploads/2019/04/Netflix.png" alt=""/></Header>
@@ -193,3 +113,10 @@ export default class App extends Component{
         )
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {lists:state}
+}
+
+export default connect(mapStateToProps,{clickList,clickRecom})(App)
