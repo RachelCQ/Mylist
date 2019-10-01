@@ -1,87 +1,43 @@
-const data = {
-    'mylist' : [
-
-        {
-
-            'title': 'Futurama',
-
-            'id': 1,
-
-            'img': 'http://cdn1.nflximg.net/webp/7621/3787621.webp'
-
-        },
-
-        {
-
-            'title': 'The Interview',
-
-            'id': 2,
-
-            'img': 'http://cdn1.nflximg.net/webp/1381/11971381.webp'
-
-        },
-
-        {
-
-            'title': 'Gilmore Girls',
-
-            'id': 3,
-
-            'img': 'http://cdn1.nflximg.net/webp/7451/11317451.webp'
-
-        }
-
-    ],
-    'recommendations' : [
-
-        {
-
-            'title': 'Family Guy',
-
-            'id': 4,
-
-            'img': 'http://cdn5.nflximg.net/webp/5815/2515815.webp'
-
-        },
-
-        {
-
-            'title': 'The Croods',
-
-            'id': 5,
-
-            'img': 'http://cdn3.nflximg.net/webp/2353/3862353.webp'
-
-        },
-
-        {
-
-            'title': 'Friends',
-
-            'id': 6,
-
-            'img': 'http://cdn0.nflximg.net/webp/3200/9163200.webp'
-
-        }
-
-    ]
-};
-const {mylist,recommendations} = data;
 const initState = {
-    mylist,
-    recommendations
+    mylist:[],
+    recommendations:[],
+    error:null,
+    loading:false,
 }
 export default function reducer(state=initState,action) {
+
     switch (action.type) {
+        case 'MOVIE_FETCH_START':
+            return {
+                ...state,
+                error:null,
+                loading: true
+            };
+        case 'MOVIE_FETCH_SUCCESS':
+            return {
+                ...state,
+                loading: false,
+                error:null,
+                mylist: action.data.mylist,
+                recommendations:  action.data.recommendations
+            };
+        case 'MOVIE_FETCH_FAIL':
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            };
         case 'click_list':
             return {
                 ...state,
+                error:null,
                 mylist: action.data.newData,
                 recommendations:[...state.recommendations,...action.data.theMovie]
             };
         case 'click_recom':
             return {
                 ...state,
+                error:null,
                 mylist: [...state.mylist,...action.data.theMovie],
                 recommendations:action.data.newData
             };

@@ -49,3 +49,16 @@ span img{
     font-size: 20px;
     font-weight: bold;
 }
+
+
+.exa {
+    text-align: center;
+    line-height: 500px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    padding: 30px 50px;
+}
+
+.ant-card-head-title{
+    text-align: left;
+}
